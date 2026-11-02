@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: #0b0d10;
+}
+
+body {
+  margin: 0;
+  color: #eef1f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-touch-callout: none;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px; /* prevents iOS zoom on focus */
+  -webkit-touch-callout: default;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.pt-safe {
+  padding-top: max(var(--safe-top), 12px);
+}
+.pb-nav {
+  padding-bottom: calc(84px + var(--safe-bottom));
+}
+.pb-safe {
+  padding-bottom: max(var(--safe-bottom), 12px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-muted;
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-raised px-3.5 py-3 text-ink placeholder:text-dim outline-none transition focus:border-accent/60;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-[15px] font-semibold transition active:scale-[0.98] disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-[#06281b];
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-raised text-ink;
+  }
+  .btn-ghost {
+    @apply btn text-muted;
+  }
+  .btn-danger {
+    @apply btn border border-danger/30 bg-danger/10 text-danger;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-sheet {
+  animation: sheet-in 260ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.animate-fade {
+  animation: fade-in 180ms ease-out;
+}
+
+input[type='date'] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 48px;
+}
+input[type='date']::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: #262b33;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 26px;
+  width: 26px;
+  border-radius: 9999px;
+  background: #eef1f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
